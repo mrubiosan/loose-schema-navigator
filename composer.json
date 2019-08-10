@@ -2,7 +2,7 @@
     "name": "mrubiosan/loose-schema-navigator",
     "description": "Carefree traversal of data structures with eventual strict typing",
     "type": "library",
-    "license": "MIT",
+    "license" : "GPL-3.0",
     "authors": [
         {
             "name": "Marc Rubio",
