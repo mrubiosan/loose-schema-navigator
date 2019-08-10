@@ -30,14 +30,12 @@ class Navigator
         }
 
         if (is_array($retval->node) && array_key_exists($name, $retval->node)) {
-            $node = $retval->node[$name];
+            $retval->node = $retval->node[$name];
         } elseif (is_object($retval->node) && property_exists($retval->node, $name)) {
-            $node = $retval->node->$name;
+            $retval->node = $retval->node->$name;
         } else {
             $retval->exists = false;
         }
-
-        $retval->node = $node ?? null;
 
         return $retval;
     }
@@ -163,4 +161,3 @@ class Navigator
         return [json_decode($jsonStr), json_last_error() === JSON_ERROR_NONE];
     }
 }
-
