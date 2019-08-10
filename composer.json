@@ -1,0 +1,23 @@
+{
+    "name": "mrubiosan/loose-schema-navigator",
+    "description": "Carefree traversal of data structures with eventual strict typing",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marc Rubio",
+            "email": "mrubiosan@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mrubiosan\\LooseSchemaNavigator\\": "src"
+        }
+    },
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    }
+}
