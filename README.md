@@ -1,6 +1,6 @@
 # Loose Schema Navigator
 
-[![Build Status](https://travis-ci.org/mrubiosan/loose-schema-navigator.svg?branch=master)](https://travis-ci.org/mrubiosan/loose-schema-navigator) [![Test Coverage](https://api.codeclimate.com/v1/badges/d75c48caef446238c68c/test_coverage)](https://codeclimate.com/github/mrubiosan/loose-schema-navigator/test_coverage)
+[![Build Status](https://travis-ci.org/mrubiosan/loose-schema-navigator.svg?branch=master)](https://travis-ci.org/mrubiosan/loose-schema-navigator) [![Maintainability](https://api.codeclimate.com/v1/badges/d75c48caef446238c68c/maintainability)](https://codeclimate.com/github/mrubiosan/loose-schema-navigator/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/d75c48caef446238c68c/test_coverage)](https://codeclimate.com/github/mrubiosan/loose-schema-navigator/test_coverage)
 
 ## Example usage
 ```php
