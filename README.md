@@ -4,7 +4,7 @@
 
 ## Example usage
 ```php
-$jsonStr = <<<JSONSTR
+$data = <<<JSONSTR
 {
 	"foo":"123"
 	"bar":{
