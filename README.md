@@ -14,7 +14,7 @@ $jsonStr = <<<JSONSTR
 }
 JSONSTR;
 
-$nav = new Navigator(json_decode($data));
+$nav = new Navigator($data);
 
 $nav->foo->int() // 123
 $nav->foo->string() // "123"
