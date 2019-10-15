@@ -116,12 +116,17 @@ class Navigator
     public function array(?array $default = []) : ?array
     {
         if ($this->isValid()) {
-            if (is_array($this->node)) {
-                return $this->node;
+            $node = $this->node;
+            if (is_string($node)) {
+                $node = $this->jsonFilter($node);
             }
 
-            if (is_object($this->node)) {
-                return (array) $this->node;
+            if (is_array($node)) {
+                return $node;
+            }
+
+            if (is_object($node)) {
+                return (array) $node;
             }
         }
 
@@ -135,12 +140,17 @@ class Navigator
     public function object(\stdClass $default = null) : ?\stdClass
     {
         if ($this->isValid()) {
-            if (is_array($this->node)) {
-                return (object) $this->node;
+            $node = $this->node;
+            if (is_string($node)) {
+                $node = $this->jsonFilter($node);
             }
 
-            if (is_object($this->node)) {
-                return $this->node;
+            if (is_array($node)) {
+                return (object) $node;
+            }
+
+            if (is_object($node)) {
+                return $node;
             }
         }
 
@@ -154,6 +164,12 @@ class Navigator
     {
         $satisfiesFn = $this->satisfiesFn;
         return $this->exists && ($satisfiesFn === null || $satisfiesFn($this->node) === true);
+    }
+
+    private function jsonFilter(string $jsonStr)
+    {
+        [$result, $ok] = $this->jsonDecode($jsonStr);
+        return $ok ? $result : $jsonStr;
     }
 
     private function jsonDecode(string $jsonStr) : array

@@ -23,5 +23,6 @@ $nav->misisngProp->int(-1) // -1
 $nav->bar->baz->int() // 1
 $nav->bar->baz->bool() // true
 $nav->bar->buzz->string() //  "{"abc":"xyz"}"
+$nav->bar->buzz->object() //  {"abc":"xyz"}
 $nav->bar->buzz->abc->string() // "xyz"
 ```

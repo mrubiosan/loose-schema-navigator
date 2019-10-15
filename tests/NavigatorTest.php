@@ -95,9 +95,13 @@ class NavigatorTest extends TestCase
             ['array', ['a' => 1], ['a' => 1]],
             ['array', (object) [1, 2, 3], [1, 2, 3]],
             ['array', 'a string', []],
+            ['array', '["a json array string"]', ['a json array string']],
+            ['array', '{"foo":"a json object string"}', ['foo' => 'a json object string']],
             ['object', (object) [1, 2, 3], (object) [1, 2, 3]],
             ['object', ['a' => 1], (object) ['a' => 1]],
             ['object', 'a string', new \stdClass()],
+            ['object', '{"foo":"a json object string"}', (object) ['foo' => 'a json object string']],
+            ['object', '["a json array string"]', (object) ['a json array string']],
         ];
     }
 
