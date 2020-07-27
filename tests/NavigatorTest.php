@@ -127,5 +127,17 @@ class NavigatorTest extends TestCase
 
         $this->assertEquals(0, $testSubject->baz->bar->int());
     }
+
+    public function testTraversingJsonStringsInvalidatesCachedResultInChildren()
+    {
+        $innerData = json_encode(['xxx' => 'yyy']);
+        $outerData = json_encode(['aaa' => 'bbb', 'ccc' => $innerData]);
+
+        $testSubject = new Navigator($outerData);
+
+        $this->assertSame('bbb', $testSubject->aaa->string());
+        $this->assertSame('yyy', $testSubject->ccc->xxx->string());
+        $this->assertNotSame('bbb', $testSubject->ccc->aaa->string());
+    }
 }
 

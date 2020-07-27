@@ -3,11 +3,28 @@ namespace Mrubiosan\LooseSchemaNavigator;
 
 class Navigator
 {
+    /**
+     * @var The current node or value of the data structure
+     */
     private $node;
 
+    /**
+     * Whether the current value exists in the data structure, or is just a placeholder to facilitate chaining
+     * @var bool
+     */
     private $exists = true;
 
+    /**
+     * @var callable|null
+     */
     private $satisfiesFn;
+
+    /**
+     * Aids in json decoding the node only once
+     * @var array|null
+     * @see Navigator::jsonDecode()
+     */
+    private $jsonDecodeResult;
 
     public function __construct($node)
     {
@@ -26,7 +43,8 @@ class Navigator
         }
 
         if (is_string($retval->node)) {
-            [$retval->node, $retval->exists] = $this->jsonDecode($retval->node);
+            [$retval->node, $retval->exists] = $this->jsonDecode();
+            $retval->jsonDecodeResult = null;
         }
 
         if (is_array($retval->node) && array_key_exists($name, $retval->node)) {
@@ -118,7 +136,7 @@ class Navigator
         if ($this->isValid()) {
             $node = $this->node;
             if (is_string($node)) {
-                $node = $this->jsonFilter($node);
+                $node = $this->jsonFilter();
             }
 
             if (is_array($node)) {
@@ -142,7 +160,7 @@ class Navigator
         if ($this->isValid()) {
             $node = $this->node;
             if (is_string($node)) {
-                $node = $this->jsonFilter($node);
+                $node = $this->jsonFilter();
             }
 
             if (is_array($node)) {
@@ -166,14 +184,18 @@ class Navigator
         return $this->exists && ($satisfiesFn === null || $satisfiesFn($this->node) === true);
     }
 
-    private function jsonFilter(string $jsonStr)
+    private function jsonFilter()
     {
-        [$result, $ok] = $this->jsonDecode($jsonStr);
-        return $ok ? $result : $jsonStr;
+        [$result, $ok] = $this->jsonDecode();
+        return $ok ? $result : $this->node;
     }
 
-    private function jsonDecode(string $jsonStr) : array
+    private function jsonDecode() : array
     {
-        return [json_decode($jsonStr), json_last_error() === JSON_ERROR_NONE];
+        if ($this->jsonDecodeResult === null) {
+            $this->jsonDecodeResult = [json_decode($this->node), json_last_error() === JSON_ERROR_NONE];
+        }
+
+        return $this->jsonDecodeResult;
     }
 }
