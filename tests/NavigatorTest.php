@@ -17,7 +17,7 @@ class NavigatorTest extends TestCase
         ];
 
         $testSubject = new Navigator($data);
-        $this->assertEquals('hello', $testSubject->foo->bar->baz->string());
+        $this->assertSame('hello', $testSubject->foo->bar->baz->string());
     }
 
     public function testItJsonDecodesNodesWhenTraversing()
@@ -29,7 +29,7 @@ class NavigatorTest extends TestCase
         ];
 
         $testSubject = new Navigator($data);
-        $this->assertEquals('hello', $testSubject->foo->bar->baz->string());
+        $this->assertSame('hello', $testSubject->foo->bar->baz->string());
 
         $badData = [
             'foo' => [
@@ -38,7 +38,7 @@ class NavigatorTest extends TestCase
         ];
 
         $testSubject = new Navigator($badData);
-        $this->assertEquals('', $testSubject->foo->bar->baz->string());
+        $this->assertSame('', $testSubject->foo->bar->baz->string());
     }
 
     public function testObjectGivenDefault()
@@ -114,7 +114,7 @@ class NavigatorTest extends TestCase
         ];
 
         $testSubject = new Navigator($data);
-        $this->assertEquals('myDefault', $testSubject->foo->bar->defaultIfEmpty()->string('myDefault'));
+        $this->assertSame('myDefault', $testSubject->foo->bar->defaultIfEmpty()->string('myDefault'));
     }
 
     public function testNonExistingNodes()
@@ -125,7 +125,7 @@ class NavigatorTest extends TestCase
         ];
         $testSubject = new Navigator($data);
 
-        $this->assertEquals(0, $testSubject->baz->bar->int());
+        $this->assertSame(0, $testSubject->baz->bar->int());
     }
 
     public function testTraversingJsonStringsInvalidatesCachedResultInChildren()
